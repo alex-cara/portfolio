@@ -30,17 +30,14 @@
             });
 `;
 
-	let Selfie = '/aboutme.png';
-	let Artifact1 = '/artifact1.png';
-	let Artifact2 = '/artifact2.png';
-	let Artifact3 = '/artifact3.png';
+	let Myvid = '/myvideo.mp4';
 
 	// State
 	let value = $state('files');
-	let is_about_me = $state(true);
-	let is_art_1 = $state(true);
-	let is_art_2 = $state(true);
-	let is_art_3 = $state(true);
+	let is_about_me = $state(false);
+	let is_art_1 = $state(false);
+	let is_art_2 = $state(false);
+	let is_art_3 = $state(false);
 	const set_states = (state: String) => {
 		is_about_me = false;
 		is_art_1 = false;
@@ -80,11 +77,19 @@
 		<!-- <pre class="pre">value: {value}</pre>  THIS WAS THE PREGIVEN TEXT -->
 		{#if is_about_me}
 			<div class="center w-[66%] items-center justify-center pb-4">
-				<div><h2 class="bg-red-500 text-5xl">About Me</h2></div>
-				<div><img src={Selfie} /></div>
+				<div><h2 class="text-5xl">About Me</h2></div>
+				<!-- <div><img src={Selfie} /></div> -->
+				<div>
+					<video width="640" height="480" controls>
+						<source src={Myvid} type="video/mp4" />
+						Your browser does not support the video tag.
+					</video>
+				</div>
 				<div>
 					<p class="bg-red-500 text-xl">
-						Hi! I'm currently studying Computer Science at the University of Maryland. <br />
+						Hi! This webpage documents certain projects I've made. To navigate the webpage look to
+						the left for a menu to change and view the artifacts. Now, about me: I'm currently
+						studying Computer Science at the University of Maryland. <br />
 						Outside of academics, I enjoy games that challenge the mind like Chess, Go, and Tetris.
 						<br />
 						I’m also a big fan of MMA, wrestling, and basketball. <br /> When it comes to software
@@ -109,7 +114,7 @@
 		{/if}
 		{#if is_art_1}
 			<div class="center w-[66%] items-center justify-center pb-4">
-				<div><img src={Artifact1} /></div>
+				<!-- <div><img src={Artifact1} /></div> -->
 				<div>
 					<p>
 						My rust AES project is based on the FIPS document. I tried to focus on 3 things,
@@ -135,7 +140,7 @@
 		{/if}
 		{#if is_art_2}
 			<div class="center w-[66%] items-center justify-center pb-4">
-				<div><img src={Artifact2} /></div>
+				<!-- <div><img src={Artifact2} /></div> -->
 				<div>
 					<p>
 						This artifact focuses on my embedded/robotic endeavours.
@@ -162,7 +167,7 @@
 		{/if}
 		{#if is_art_3}
 			<div class="center w-[66%] items-center justify-center pb-4">
-				<div><img src={Artifact3} /></div>
+				<!-- <div><img src={Artifact3} /></div> -->
 				<div>
 					<p>
 						This is a self referential artifact, given the fact that is in fact this very website.
