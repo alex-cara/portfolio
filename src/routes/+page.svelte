@@ -5,32 +5,42 @@
 
 	import CodeBlock from '$lib/components/CodeBlock/CodeBlock.svelte';
 
+	import { createLinkPreview, melt } from '@melt-ui/svelte';
+	import { fly } from 'svelte/transition';
+
+	const {
+		elements: { trigger, content, arrow },
+		states: { open }
+	} = createLinkPreview({
+		forceVisible: true
+	});
+
 	// Source Code
 	const rust_code = `for i in 0..2 {
-            thread::scope(|s| {
-                s.spawn(|| {
-                    for j in 0..((num_files + (1 - i)) / 2) {
-                        let curr_file = fs::read(&files[i + 2 * j]);
-                        let mut curr_file = curr_file.unwrap();
-                        /* Do decryption/encryption based on user input */
-                        match (args.reverse, use_iv) {
-                            (false, false) => data_encrypt(&mut curr_file, &expanded_key),
-                            (false, true) => data_encrypt_iv(&mut curr_file, &expanded_key, &iv),
-                            (true, false) => data_decrypt(&mut curr_file, &expanded_key),
-                            (true, true) => data_decrypt_iv(&mut curr_file, &expanded_key, &iv),
-                        };
+thread::scope(|s| {
+  s.spawn(|| {
+    for j in 0..((num_files + (1 - i)) / 2) {
+      let curr_file = fs::read(&files[i + 2 * j]);
+      let mut curr_file = curr_file.unwrap();
+      /* Do decryption/encryption based on user input */
+      match (args.reverse, use_iv) {
+        (false, false) => data_encrypt(&mut curr_file, &expanded_key),
+        (false, true) => data_encrypt_iv(&mut curr_file, &expanded_key, &iv),
+        (true, false) => data_decrypt(&mut curr_file, &expanded_key),
+        (true, true) => data_decrypt_iv(&mut curr_file, &expanded_key, &iv),
+      };
 
-                        let _ = fs::write(
-                            files[i + 2 * j].to_owned() + enc_or_dec,
-                            &curr_file[0..curr_file.len()],
-                        );
-                    }
-                });
-            });
-	}
+      let _ = fs::write(
+        files[i + 2 * j].to_owned() + enc_or_dec,
+        &curr_file[0..curr_file.len()],
+      );
+    }
+  });
+});
 `;
 
 	let Myvid = '/myvideo.mp4';
+	let Carvid = '/myvideo.mp4';
 	// State
 	let value = $state('files');
 	let is_about_me = $state(true);
@@ -91,7 +101,7 @@
 					</video>
 				</div>
 				<div class="relative items-center">
-					<p class="text-justify z-30">
+					<p class="z-30 text-center">
 						Hi! This webpage documents certain projects I've made. To navigate the webpage look to
 						the left for a menu to change and view the artifacts. Now, about me: I'm currently
 						studying Computer Science at the University of Maryland. Outside of academics, I enjoy
@@ -121,8 +131,10 @@
 				<!-- <div><img src={Artifact1} /></div> -->
 				<div>
 					<p class="z-10 text-center">
-						My rust AES project is based on the FIPS document. I tried to focus on 3 things,
-						idomatic code, performance, and following loosely the psuedocode.
+						This project is an encrpytion algorithm built in Rust, of the Advanced Encryption
+						Standard (AES) is solely based on the FIPS document 197. This project highlights and
+						focuses on 3 things, idomatic code, performance, and following the psuedocode provided
+						by FIPS.
 						<br />
 						One thing to note is that, while many architures provide machine instructions for AES, using
 						that wouldn't really follow the psuedocode.
@@ -137,7 +149,7 @@
 						while reading another file.
 					</p>
 				</div>
-				<div>
+				<div class="space-y-4 p-10">
 					<CodeBlock code={rust_code} lang="rs" />
 				</div>
 			</div>
@@ -146,7 +158,7 @@
 			<div class="center h-full w-[66%] items-center justify-center pb-4">
 				<!-- <div><img src={Artifact2} /></div> -->
 				<div>
-					<p class="z-10">
+					<p class="z-10 text-center">
 						This artifact focuses on my embedded/robotic endeavours.
 						<br />
 						Here I have built a robotic car, which can follow lines, based on light reflection using
@@ -163,9 +175,14 @@
 						it is still a good learning experience, adjusting with pin I/O and reading in and interacting
 						based on values.
 						<br />
-						(*Here ideally would be a video of it running but I don't have it on my laptop, so I would
-						need to go back home*)
 					</p>
+				</div>
+
+				<div class="relative z-30 items-center">
+					<video width="640" height="480" class="items-center" controls>
+						<source src={Carvid} type="video/mp4" />
+						Your browser does not support the video tag.
+					</video>
 				</div>
 			</div>
 		{/if}
@@ -173,7 +190,7 @@
 			<div class="center h-full w-[66%] items-center justify-center pb-4">
 				<!-- <div><img src={Artifact3} /></div> -->
 				<div>
-					<p class="z-30">
+					<p class="z-30 text-center">
 						This is a self referential artifact, given the fact that is in fact this very website.
 						<br />
 						While I can highlight some code here, I think it is best to check out the github for the
@@ -190,9 +207,64 @@
 						Svelte, (a framework I have had no previous experience with) and component libraries SkeletonDev
 						and Svelte UX.
 						<br />
-						(* There is some more visualy stuff I can point out, and I intend to insert some gooey cool
-						text from Svelte UX to demonstrate my point as this is a artifact and keep it visual *)
+						<br />
+						For example, here is a neat piece of styling: a link preview. Included below is a link to
+						the github of the project, presented nicely.
+						<br />
+
+						{#if $open}
+							<div
+								use:melt={$content}
+								transition:fly={{ y: -5, duration: 100 }}
+								class=" z-10 rounded-md bg-white shadow-sm"
+							>
+								<div class="w-[300px] rounded-md bg-white p-5 shadow-sm">
+									<div class="flex flex-col gap-2">
+										<img
+											src="/logo_mark.svg"
+											alt="Melt UI Logo"
+											class="object-fit block h-14 w-14 rounded-full bg-neutral-900 p-1"
+										/>
+										<div class="flex flex-col gap-4">
+											<div>
+												<div class="font-bold text-neutral-900">Melt UI</div>
+												<div class="text-neutral-400">melt-ui/melt-ui</div>
+											</div>
+										</div>
+										<div class="m-0 text-neutral-700">
+											A set of accessible, unstyled component builders for Svelte & SvelteKit. Open
+											source.
+										</div>
+										<div class="flex gap-4">
+											<div class="flex gap-1">
+												<div class="text-neutral-900">2k</div>
+												<div class="text-neutral-400">Stars</div>
+											</div>
+											<div class="flex gap-1">
+												<div class="text-neutral-900">103</div>
+												<div class="text-neutral-400">Forks</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div use:melt={$arrow} />
+							</div>
+						{/if}
 					</p>
+					<a
+						class="trigger center"
+						href="https://github.com/alex-cara/portfolio"
+						target="_blank"
+						rel="noopener noreferrer"
+						use:melt={$trigger}
+					>
+						<img
+							src="/logo_mark.svg"
+							alt="Melt UI Logo"
+							class="center z-30 m-auto h-[25%] w-[25%] rounded-full bg-neutral-900 object-contain p-1"
+						/>
+						<span class="sr-only">Open Melt UI Details</span>
+					</a>
 				</div>
 			</div>
 		{/if}
