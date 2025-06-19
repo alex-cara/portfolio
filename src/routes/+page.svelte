@@ -91,11 +91,11 @@ thread::scope(|s| {
 			autoplay: false
 		})
 			.add('.circle', {
-				r: '500',
+				r: 5400,
 				ease: 'inExpo'
 			})
 			.add('.circle', {
-				r: '1',
+				r: 1,
 				ease: 'outQuint'
 			});
 	});
@@ -103,25 +103,34 @@ thread::scope(|s| {
 
 {#if true}
 	<div
-		class="home-grid relative z-999 h-screen overflow-hidden bg-red-400"
-		onclick={(event) => {
-			invis = 'false';
+		class="relative grid bg-red-400 h-screen overflow-hidden z-999"
+		onclick={() => {
+			invis = "false";
 			m.x = event.clientX;
 			m.y = event.clientY;
 			cover_and_reveal.restart();
-			invis = 'true';
+			invis = "true";
 		}}
 	>
 		<h1 class="bg-red-50">Welcome to SvelteKit</h1>
 		<p class="bg-red-200">
-			Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation
+			Visit <a href="https://svelte.dev/docs/kit"
+				>svelte.dev/docs/kit</a
+			> to read the documentation
 		</p>
 
-		<svg class="circle absolute z-999 h-screen w-full overflow-hidden">
-			<circle cx={m.x} cy={m.y} r={rad} fill="yellow" />
+		<svg class="absolute z-999 h-screen w-full overflow-hidden">
+			<circle
+				class="circle"
+				cx={m.x}
+				cy={m.y}
+				r={rad}
+				fill="yellow"
+			/>
 		</svg>
 	</div>
-{:else if is_about_me}
+{/if}
+{#if false}
 	<div class="center h-full w-[66%] items-center justify-center pb-4">
 		<div><h2 class="m-auto text-center text-5xl">About Me</h2></div>
 		<!-- <div><img src={Selfie} /></div> -->
@@ -149,7 +158,8 @@ thread::scope(|s| {
 			</p>
 		</div>
 	</div>
-{:else if video}
+{/if}
+{#if video}
 	<div class="center h-full w-[66%] items-center justify-center pb-4">
 		<div><h2 class="m-auto w-[100%] text-center text-5xl">My Portfolio Video</h2></div>
 		<!-- <div><img src={Artifact2} /></div> -->
@@ -333,4 +343,7 @@ thread::scope(|s| {
 {/if}
 
 <style>
+	.home-grid {
+		display: grid;
+	}
 </style>
