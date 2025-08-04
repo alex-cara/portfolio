@@ -1,5 +1,4 @@
 <!-- @component Code Block based on: https://shiki.style/ -->
-
 <script module>
 	import { createHighlighterCoreSync } from 'shiki/core';
 	import { createJavaScriptRegexEngine } from 'shiki/engine/javascript';
@@ -32,7 +31,8 @@
 		lang = 'console',
 		theme = 'dark-plus',
 		// Base Style Props
-		base = ' overflow-hidden',
+		// Before it was
+		base = ' overflow-scroll',
 		rounded = 'rounded-container',
 		shadow = '',
 		classes = '',
