@@ -4,7 +4,7 @@
 	import { createJavaScriptRegexEngine } from 'shiki/engine/javascript';
 	// Themes
 	// https://shiki.style/themes
-	import themeDarkPlus from 'shiki/themes/dark-plus.mjs';
+	import themeGruvboxDarkHard from 'shiki/themes/gruvbox-dark-hard.mjs';
 	// Languages
 	// https://shiki.style/languages
 	import console from 'shiki/langs/console.mjs';
@@ -12,14 +12,15 @@
 	import css from 'shiki/langs/css.mjs';
 	import js from 'shiki/langs/javascript.mjs';
 	import rs from 'shiki/langs/rs.mjs';
+	import cpp from 'shiki/langs/cpp.mjs';
 
 	// https://shiki.style/guide/sync-usage
 	const shiki = createHighlighterCoreSync({
 		engine: createJavaScriptRegexEngine(),
 		// Implement your import theme.
-		themes: [themeDarkPlus],
+		themes: [themeGruvboxDarkHard],
 		// Implement your imported and supported languages.
-		langs: [console, html, css, js, rs]
+		langs: [console, html, css, js, rs, cpp]
 	});
 </script>
 
@@ -29,13 +30,13 @@
 	let {
 		code = '',
 		lang = 'console',
-		theme = 'dark-plus',
+		theme = 'gruvbox-dark-hard',
 		// Base Style Props
 		// Before it was
-		base = ' overflow-scroll',
+		base = 'overflow-scroll',
 		rounded = 'rounded-container',
 		shadow = '',
-		classes = '',
+		classes = 'flex text-2xl',
 		// Pre Style Props
 		preBase = '',
 		prePadding = '[&>pre]:p-4',

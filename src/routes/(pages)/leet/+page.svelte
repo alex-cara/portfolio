@@ -1,4 +1,4 @@
 <p>
 	I have recently solved an leet code that, the best algorithm I could find mentioned and used was
-	O(nlogn). I found a solution that solves the problem in O(n).
+	O(n&#8729logn). I found a solution that solves the problem in O(n).
 </p>
