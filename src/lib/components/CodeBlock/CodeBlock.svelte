@@ -4,7 +4,7 @@
 	import { createJavaScriptRegexEngine } from 'shiki/engine/javascript';
 	// Themes
 	// https://shiki.style/themes
-	import themeGruvboxDarkHard from 'shiki/themes/gruvbox-dark-hard.mjs';
+	import themeGruvboxDarkSoft from 'shiki/themes/gruvbox-dark-soft.mjs';
 	// Languages
 	// https://shiki.style/languages
 	import console from 'shiki/langs/console.mjs';
@@ -18,7 +18,7 @@
 	const shiki = createHighlighterCoreSync({
 		engine: createJavaScriptRegexEngine(),
 		// Implement your import theme.
-		themes: [themeGruvboxDarkHard],
+		themes: [themeGruvboxDarkSoft],
 		// Implement your imported and supported languages.
 		langs: [console, html, css, js, rs, cpp]
 	});
@@ -30,17 +30,17 @@
 	let {
 		code = '',
 		lang = 'console',
-		theme = 'gruvbox-dark-hard',
+		theme = 'gruvbox-dark-soft',
 		// Base Style Props
 		// Before it was
 		base = 'overflow-scroll',
-		rounded = 'rounded-container',
+		rounded = '',
 		shadow = '',
-		classes = 'flex text-2xl',
+		classes = 'flex text-xl  rounded-2xl ',
 		// Pre Style Props
 		preBase = '',
-		prePadding = '[&>pre]:p-4',
-		preClasses = ''
+		prePadding = '[&>pre]:p-3',
+		preClasses = '[&>pre]:w-full '
 	}: CodeBlockProps = $props();
 
 	// Shiki convert to HTML

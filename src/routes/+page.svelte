@@ -41,39 +41,39 @@
 		<div class="home-grid relative z-10 h-screen gap-2 p-8">
 			<div class="intro-square relative md:col-span-2 md:row-span-2 md:rounded-2xl">
 				<CustomButton id="intro" href="/about">
-					<button class="latte bg-gruv-purple-dim h-full w-full rounded-[1vw]">
+					<button class="latte bg-gruv-purple-dim h-full w-full">
 						<p class="font-ovo text-5xl font-semibold">alexandru cara</p>
 						<hr class="mx-auto my-4 h-1 w-12 rounded-sm border-0 bg-gray-100 dark:bg-black" />
 						<p class="font-ovo text-5xl font-semibold">software engineer</p>
 					</button>
 				</CustomButton>
 			</div>
-			<div class="exhibit1-square roundex-2xl md:roundex-2xl relative">
+			<div class="exhibit1-square relative">
 				<CustomButton id="exhibit1" href="/aes">
-					<button class="latte bg-gruv-aqua-dim h-full w-full rounded-[1vw]">
-						<p class="font-gugi text-4xl font-extrabold">AES</p>
+					<button class="latte bg-gruv-aqua-dim h-full w-full">
+						<p class="font-ovo text-4xl font-extrabold">AES</p>
 					</button>
 				</CustomButton>
 			</div>
-			<div class="exhibit2-square md:roundex-2xl relative">
+			<div class="exhibit2-square relative">
 				<CustomButton id="exhibit2" href="/leet">
-					<button class="latte bg-gruv-yellow-dim h-full w-full rounded-[1vw]">
-						<p class="font-nixie text-6xl font-extrabold">O(n&#8729lgn)</p>
+					<button class="latte bg-gruv-yellow-dim h-full w-full">
+						<p class="font-ovo text-6xl">O(n&#8729lgn)</p>
 						<hr class="mx-auto my-4 h-1 w-12 rounded-sm border-0 bg-gray-100 dark:bg-black" />
-						<p class="font-nixie text-6xl font-extrabold">O(n)</p>
+						<p class="font-ovo text-6xl">O(n)</p>
 					</button>
 				</CustomButton>
 			</div>
-			<div class="relative md:col-span-2 md:rounded-2xl">
+			<div class="relative md:col-span-2">
 				<CustomButton id="exhibit3" href="/car">
-					<button class="latte bg-ctp-maroon-600 h-full w-full rounded-[1vw]">
-						<p class="font-nixie text-3xl font-extrabold">rc car</p>
+					<button class="latte bg-ctp-maroon-600 h-full w-full">
+						<p class="font-ovo text-3xl font-extrabold">rc car</p>
 					</button>
 				</CustomButton>
 			</div>
 			<div class="relative w-full">
 				<CustomButton id="blog" href="/blog">
-					<button class="latte bg-ctp-blue-300 h-full w-full rounded-[1vw]">
+					<button class="latte bg-ctp-blue-300 h-full w-full">
 						<p class="font-nixie text-3xl font-extrabold">Blog</p>
 					</button>
 				</CustomButton>

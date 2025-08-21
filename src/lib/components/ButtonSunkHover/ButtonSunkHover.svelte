@@ -41,13 +41,13 @@
 >
 	<a {href}>
 		{@render children()}
-		<div id={id + 'hover'} class="customButton-hover md:rounded-[1vw]"></div>
-		<div id={id + 'sunk'} class="customButton-sunk md:rounded-[1vw]"></div>
+		<div id={id + 'hover'} class="customButton-hover"></div>
+		<div id={id + 'sunk'} class="customButton-sunk"></div>
 	</a>
 </div>
 
 <style>
-	@media only screen and (width < 48rem) {
+	@media only screen and (width > 48rem) {
 		.customButton-sunk {
 			content: '';
 			height: 100%;

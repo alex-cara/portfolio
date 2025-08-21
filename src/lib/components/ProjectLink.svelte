@@ -1,4 +1,5 @@
 <script>
+	import { fly } from 'svelte/transition';
 	import { createLinkPreview, melt } from '@melt-ui/svelte';
 	let { name, repo, link, description } = $props();
 

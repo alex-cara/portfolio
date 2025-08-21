@@ -12,10 +12,10 @@
 	--color-gruv-blue-dim: #458588;
 	--color-gruv-purple-dim: #b16286;
 	--color-gruv-aqua-dim: #689d6a;
-	--color-gruv-brown: #ffe1c8;
+	--color-gruv-brown: #fffced;
 	/* --color-gruv-brown: #c9ac90; */
 }
 
 :global(body) {
-	background-color: #ffe1c8;
+	background-color: #fffced;
 }
