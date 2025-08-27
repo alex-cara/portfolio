@@ -74,10 +74,10 @@
 			position: absolute;
 			z-index: -1;
 			box-shadow:
-				0 1px 3px rgba(0, 0, 0, 0.17),
-				0 2px 4px rgba(0, 0, 0, 0.12),
-				0 4px 8px rgba(0, 0, 0, 0.1),
-				0 8px 16px rgba(0, 0, 0, 0.07),
+				0 1px 3px rgba(0, 0, 0, 0.37),
+				0 2px 4px rgba(0, 0, 0, 0.32),
+				0 4px 8px rgba(0, 0, 0, 0.2),
+				0 8px 16px rgba(0, 0, 0, 0.15),
 				0 16px 32px rgba(0, 0, 0, 0.07),
 				0 32px 64px rgba(0, 0, 0, 0.07);
 			opacity: 0;
