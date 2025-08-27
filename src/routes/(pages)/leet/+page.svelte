@@ -1,12 +1,12 @@
 <script>
-	import ProjectLink from '$lib/components/ProjectLink.svelte';
+	import ProjectLink from '$lib/components/ProjectLink/ProjectLink.svelte';
 	import HomeButton from '$lib/components/HomeButton/HomeButton.svelte';
 	import CodeBlock from '$lib/components/CodeBlock/CodeBlock.svelte';
 	import { cpp_code } from './data.js';
 </script>
 
-<HomeButton color_for_button="text-gruv-yellow-dim"></HomeButton>
-<div class="m-auto h-full w-[1000px] items-center justify-center pb-4">
+<HomeButton color_for_button="text-gruv-yellow-dim" transition_color="#d79921"></HomeButton>
+<div class="h-content m-auto w-[1000px] max-w-full items-center justify-center pb-4">
 	<h2 class="text-gruv-yellow-dim m-auto text-center text-4xl">Number of Beautiful Subsets</h2>
 
 	<p class="z-10 text-lg text-pretty">
@@ -54,15 +54,35 @@
 	<p class="z-10 text-lg text-pretty">
 		&emsp;When I saw multiple repeating numbers in the input I felt snubbed of a cool victory. The
 		problem never mentioned array would include only unique elements, but my interperation of set
-		and subset was that of no repeating elements, so I was left high and dry. Oh well! I started to
-		think on how to solve it when elements could repeat, but the internally linked hashmap no longer
-		worked, as every value would need link to the correct bounds, and my function was useless. With
-		my old assumptions invalid I came up with another set of ground rules: in a chain, the order of
-		repeating elements matters, but the order of the array does not. So I came up with a 3 loop
-		approach. First, populate the hashmap with repeats, this helps solves the bounds issue later on
-		as you won't have interior accesses to the chain. Then connect elements together in the chain
-		(while calculating subsets at the same time by storing extra information). Lastly, calculate
-		total like before. This solution actually works.
+		and subset was that of no repeating elements, so I was left high and dry. Trying to adapt the
+		solution when elements could repeat was tough, since the internally linked hashmap no longer
+		worked, as every value would need to link to the correct bounds, and my function was useless. So
+		I came up with a 3 loop approach. First, populate the hashmap with repeats, this helps solves
+		the bounds issue later on as you won't have interior accesses to the chain. Then connect
+		elements together in the chain (while calculating subsets at the same time). Lastly, calculate
+		total like before. This solution actually works, I submitted it and it is within the fastest
+		solutions, but with some variance: being faster than 100% of submissions, or 93%.
 		<br />
+		&emsp; I was curious if the best algorithm that Leet provided (written by a user called Shivam Aggarwal)
+		was faster. I suspected that since the problem had a small n, and the fact that Shivam's algorithm
+		was nlogn it would be faster. Well, I wanted to actually analysis and see if I could get my solution
+		to be faster, but to make things "fair" I knew n had to be larger than the max 18 specified by leet.
+		Doing some mental math I was indexing into a hashmap 5n times, along with more pointer derefences
+		to random memory locations in the map. An n of atleast 64 such that log n would be equal to my map
+		indexing would make a more equal field. So I converted both algorithms to rust and used i128 and
+		capped n at 126 (to avoid any integer issues). Now time to compare and improve. I made some tests,
+		setup criterion for some finer benchmarking, and ran the code. My algorithm was significantly slower,
+		around half the speed. So first thing first, the easier pickings. Rust's hashmap implementation for
+		getting the keys loops over ALL memory buckets allocated in the hash, I stored unique keys into an
+		array and used that to loop over the map instead. My next thought was to minimize branches, but in
+		my connect function they were used to prevent null pointer derefences, so it felt hard to remove,
+		so I thought to use a zeroed out struct, and in a parallel thought I considered moving more of the
+		accessess to an array, in an attempt to better cache results. The result of this started to approach
+		Shivam's implementation being faster in certain situations and worse in others (varying chain length).
+		At this point I felt it hard to think of any more major improvements that could be made. Perhaps
+		I could reorder some math expressions and simplify some parts, but I had a gut feeling this would
+		be a minimal gain. Just to be sure I ran a flamegraph and most of the time was spent on hash calculations.
+		As Rust's default hash has some focus on HashDoS attack resistance, that slow it down, so swapping
+		it out brought the solution to twice the speed of Shivam's.
 	</p>
 </div>

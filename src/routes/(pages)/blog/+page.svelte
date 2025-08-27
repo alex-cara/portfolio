@@ -2,7 +2,7 @@
 	import HomeButton from '$lib/components/HomeButton/HomeButton.svelte';
 </script>
 
-<HomeButton color_for_button="text-[#7791f5]"></HomeButton>
+<HomeButton color_for_button="text-[#7791f5]" transition_color="#7791f5"></HomeButton>
 <div class="m-auto h-full w-[900px] max-w-full items-center justify-center pb-4">
 	<div>
 		<p class="z-10 text-xl text-pretty text-gray-950">

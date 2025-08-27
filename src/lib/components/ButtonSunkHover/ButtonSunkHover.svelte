@@ -5,7 +5,7 @@
 	import { onMount } from 'svelte';
 	import { createTimeline, utils, stagger, animate } from 'animejs';
 
-	let { id, href, children } = $props();
+	let { onclick, id, href, children } = $props();
 	let from_sunk_to_hover;
 
 	onMount(() => {
@@ -39,7 +39,7 @@
 		from_sunk_to_hover.reverse();
 	}}
 >
-	<a {href}>
+	<a {href} {onclick}>
 		{@render children()}
 		<div id={id + 'hover'} class="customButton-hover"></div>
 		<div id={id + 'sunk'} class="customButton-sunk"></div>
@@ -47,7 +47,7 @@
 </div>
 
 <style>
-	@media only screen and (width > 48rem) {
+	@media only screen and (width >= 48rem) {
 		.customButton-sunk {
 			content: '';
 			height: 100%;

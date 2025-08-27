@@ -1,92 +1,59 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { createTimeline, utils, stagger, animate } from 'animejs';
+	import CustomPageTransition from '$lib/components/CustomPageTransition/CustomPageTransition.svelte';
 	import CustomButton from '$lib/components/ButtonSunkHover/ButtonSunkHover.svelte';
-
-	let m = $state({ x: 0, y: 0 });
-	let rad = $state(1);
-	let zindex = $state(1);
-	let hovered = $state('hovered');
-
-	let cover_and_reveal;
-
-	onMount(() => {
-		cover_and_reveal = createTimeline({
-			defaults: {
-				duration: 1000
-			},
-			autoplay: false
-		})
-			.add('.circle', {
-				r: 5400,
-				ease: 'inExpo'
-			})
-			.add('.circle', {
-				r: 1,
-				ease: 'outQuint'
-			});
-	});
-
-	//onclick={() => {
-	//	zindex = 999;
-	//	m.x = event.clientX;
-	//	m.y = event.clientY;
-	//	cover_and_reveal.restart();
-	//	zindex = 1;
-	//}}
+	import { sphereColor } from '$lib/components/CustomPageTransition/data';
+	function setcolor(color: string) {
+		sphereColor.set(color);
+	}
 </script>
 
-{#if true}
-	<div class="relative flex h-screen items-center justify-center">
-		<div class="home-grid relative z-10 h-screen gap-2 p-8">
-			<div class="intro-square relative md:col-span-2 md:row-span-2 md:rounded-2xl">
-				<CustomButton id="intro" href="/about">
-					<button class="latte bg-gruv-purple-dim h-full w-full">
-						<p class="font-ovo text-5xl font-semibold">alexandru cara</p>
-						<hr class="mx-auto my-4 h-1 w-12 rounded-sm border-0 bg-gray-100 dark:bg-black" />
-						<p class="font-ovo text-5xl font-semibold">software engineer</p>
-					</button>
-				</CustomButton>
-			</div>
-			<div class="exhibit1-square relative">
-				<CustomButton id="exhibit1" href="/aes">
-					<button class="latte bg-gruv-aqua-dim h-full w-full">
-						<p class="font-ovo text-4xl font-extrabold">AES</p>
-					</button>
-				</CustomButton>
-			</div>
-			<div class="exhibit2-square relative">
-				<CustomButton id="exhibit2" href="/leet">
-					<button class="latte bg-gruv-yellow-dim h-full w-full">
-						<p class="font-ovo text-6xl">O(n&#8729lgn)</p>
-						<hr class="mx-auto my-4 h-1 w-12 rounded-sm border-0 bg-gray-100 dark:bg-black" />
-						<p class="font-ovo text-6xl">O(n)</p>
-					</button>
-				</CustomButton>
-			</div>
-			<div class="relative md:col-span-2">
-				<CustomButton id="exhibit3" href="/car">
-					<button class="latte bg-ctp-maroon-600 h-full w-full">
-						<p class="font-ovo text-3xl font-extrabold">rc car</p>
-					</button>
-				</CustomButton>
-			</div>
-			<div class="relative w-full">
-				<CustomButton id="blog" href="/blog">
-					<button class="latte bg-ctp-blue-300 h-full w-full">
-						<p class="font-nixie text-3xl font-extrabold">Blog</p>
-					</button>
-				</CustomButton>
-			</div>
+<div class="relative z-90 flex h-screen items-center justify-center">
+	<div class="home-grid relative z-10 h-screen md:gap-2 md:p-8">
+		<div class="cell relative md:col-span-2 md:row-span-2">
+			<CustomButton onclick={() => sphereColor.set('#b16286')} id="intro" href="/about">
+				<button class="latte bg-gruv-purple-dim h-full w-full">
+					<p class="font-ovo text-5xl font-semibold">alexandru cara</p>
+					<hr class="mx-auto my-4 h-1 w-12 rounded-sm border-0 bg-gray-100 dark:bg-black" />
+					<p class="font-ovo text-5xl font-semibold">software engineer</p>
+				</button>
+			</CustomButton>
+		</div>
+		<div class="cell relative">
+			<CustomButton id="exhibit1" href="/aes" onclick={() => setcolor('#689d6a')}>
+				<button class="latte bg-gruv-aqua-dim h-full w-full">
+					<p class="font-ovo text-4xl font-extrabold">AES</p>
+				</button>
+			</CustomButton>
+		</div>
+		<div class="cell relative w-full">
+			<CustomButton id="exhibit2" href="/leet" onclick={() => setcolor('#d79921')}>
+				<button class="latte bg-gruv-yellow-dim h-full w-full">
+					<p class="font-ovo text-6xl">O(n&#8729lgn)</p>
+					<hr class="mx-auto my-4 h-1 w-12 rounded-sm border-0 bg-gray-100 dark:bg-black" />
+					<p class="font-ovo text-6xl">O(n)</p>
+				</button>
+			</CustomButton>
+		</div>
+		<div class="cell relative md:col-span-2">
+			<CustomButton id="exhibit3" href="/car" onclick={() => setcolor('#dc414f')}>
+				<button class="latte bg-ctp-maroon-600 h-full w-full">
+					<p class="font-ovo text-3xl font-extrabold">rc car</p>
+				</button>
+			</CustomButton>
+		</div>
+		<div class="cell relative w-full">
+			<CustomButton id="blog" href="/blog" onclick={() => setcolor('#7791f5')}>
+				<button class="latte bg-ctp-blue-300 h-full w-full">
+					<p class="font-nixie text-3xl font-extrabold">Blog</p>
+				</button>
+			</CustomButton>
 		</div>
 	</div>
-{/if}
+</div>
 
 <style>
 	/* https://enjeck.com/btns/ */
 	/* That is a website with button hover effects */
-	/* Worth noting that initial impression is an inversion of shadow drop would be cool*/
-
 	@media only screen and (width >= 48rem) {
 		.home-grid {
 			box-sizing: border-box;
@@ -104,13 +71,18 @@
 	}
 	@media only screen and (width < 48rem) {
 		.home-grid {
-			box-sizing: border-box;
 			margin: auto;
 			display: flex;
-			width: 100%;
 			flex-direction: column;
-			justify-content: space-evenly;
-			align-items: center;
+			justify-content: space-between;
+			width: 100%;
+			height: 100%;
+		}
+
+		.cell {
+			min-height: 19.5vh;
+			max-height: max-content;
+			width: 100%;
 		}
 	}
 </style>

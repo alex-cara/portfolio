@@ -19,3 +19,13 @@
 :global(body) {
 	background-color: #fffced;
 }
+
+:global(.writing-container) {
+	margin: auto;
+	height: 100%;
+	width: 1000px;
+	max-width: 100%;
+	align-items: center;
+	justify-content: center;
+	padding-bottom: 4px;
+}

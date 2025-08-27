@@ -38,7 +38,7 @@
 {/if}
 
 <a
-	class="trigger center pt-4"
+	class="trigger float-right pt-4 pr-4 pb-4"
 	href={link}
 	target="_blank"
 	rel="noopener noreferrer"
@@ -47,7 +47,7 @@
 	<img
 		src="/logo_mark.svg"
 		alt="Github logo"
-		class="center z-30 m-auto h-[25%] w-[25%] rounded-full bg-neutral-900 object-contain p-1"
+		class="center z-30 m-auto h-20 w-20 rounded-full bg-neutral-900 object-contain p-1"
 	/>
 	<span class="sr-only">Link</span>
 </a>

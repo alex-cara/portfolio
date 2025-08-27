@@ -2,8 +2,6 @@
 	import { onMount } from 'svelte';
 	import { svg, createTimeline, utils, stagger, animate } from 'animejs';
 	import HomeButton from '$lib/components/HomeButton/HomeButton.svelte';
-	let maroon = '#dc414f';
-	let car_x = $state(0.1);
 
 	onMount(() => {
 		let timeline = createTimeline({ defaults: { autoplay: false } });
@@ -31,8 +29,8 @@
 </script>
 
 <!-- For some reason using alias text-ctp-maroon-600 does not give the same result as in the home page, so a quick solution is just using the direct color-->
-<HomeButton color_for_button="text-[#dc414f]"></HomeButton>
-<div class="m-auto h-full w-[900px] max-w-full items-center justify-center pb-4">
+<HomeButton color_for_button="text-[#dc414f]" transition_color="#dc414f"></HomeButton>
+<div class="h-content m-auto w-[1000px] max-w-full items-center justify-center pb-4">
 	<div><h2 class="m-auto text-center text-4xl text-[#dc414f]">A Toy Car</h2></div>
 	<div>
 		<p class="z-10 text-xl text-pretty text-gray-950">
