@@ -70,20 +70,17 @@
 		}
 	}
 	@media only screen and (width < 48rem) {
-		/* Needs some work */
 		.home-grid {
 			margin: auto;
 			display: flex;
 			flex-direction: column;
 			justify-content: space-between;
 			width: 100%;
-			min-height: 100%;
-			height: max-content;
+			height: 100%;
 		}
 
 		.cell {
 			min-height: 19.5vh;
-			height: 19.5vh;
 			max-height: max-content;
 			width: 100%;
 		}

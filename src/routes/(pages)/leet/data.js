@@ -8,22 +8,3 @@ export const cpp_code = `int chain_subsets(int n) {
   }
   return a;
 }`;
-
-export const three_loop = `fn faster_o_n(nums: Vec<i128>, k: i128) -> i128 {
-  let mut map = HashMap::new();
-  for i in nums.iter() {
-    /* Insert elements into hashmap */
-  }
-
-  for i in map.keys() {
-    connect_chain(map.get(i - k), map(i), map(i + k));
-  }
-
-  let mut total = 0;
-  for i in map.keys() {
-    /* let chain_length = ... */
-    total += chain_length + total * chain_length;
-  }
-
-  total
-}`;

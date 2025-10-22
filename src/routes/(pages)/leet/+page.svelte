@@ -2,7 +2,7 @@
 	import ProjectLink from '$lib/components/ProjectLink/ProjectLink.svelte';
 	import HomeButton from '$lib/components/HomeButton/HomeButton.svelte';
 	import CodeBlock from '$lib/components/CodeBlock/CodeBlock.svelte';
-	import { cpp_code, three_loop } from './data.js';
+	import { cpp_code } from './data.js';
 </script>
 
 <HomeButton color_for_button="text-gruv-yellow-dim" transition_color="#d79921"></HomeButton>
@@ -16,13 +16,14 @@
 			target="_blank"
 		>
 			problem
-		</a>. To summarize the problem, in essence you are given an array of numbers and some number k.
-		You want to find the number of subsets possible, given a restriction (numbers exactly k apart
-		can not be in the same subset) preventing some subsets. For a simple example with k = 10, and
-		array=&lcub;1,2&rcub;, 1 and 2 are not exactly k apart, so they can appear in subset [1,2]. This
-		subset also contains 2 other subsets: [1] and [2], making 3 in total. If k were 1 instead of 10,
-		the subset [1,2] would be invalid leaving only 2 subsets. There is an assumption I made reading
-		the problem description that messed me up (I'll be getting to that soon).
+		</a>. In case you don't want to read the problem, in essence you are given an array of numbers
+		and a number k. You want to find the number of subsets possible, given a restriction (numbers
+		exactly k apart can not be in the same subset) preventing some subsets. For a simple example
+		with k = 10, and array=&lcub;1,2&rcub;, 1 and 2 are not exactly k apart, so they can appear in
+		subset [1,2]. This subset also contains 2 other subsets: [1] and [2], making 3 in total. If k
+		were 1 instead of 10, the subset [1,2] would be invalid leaving only 2 subsets. There is an
+		assumption I made reading the problem description that messed me up (I'll be getting to that
+		soon).
 		<br /> &emsp;When I first came across this problem I knew it was supposed to be a DP problem,
 		the hard part being how to setup the memozation properly. As I took my time to read over the
 		problem I couldn't help but think that this was solvable using combinatronics. For example, if
@@ -61,8 +62,6 @@
 		elements together in the chain (while calculating subsets at the same time). Lastly, calculate
 		total like before. This solution actually works, I submitted it and it is within the fastest
 		solutions, but with some variance: being faster than 100% of submissions, or 93%.
-
-		<CodeBlock code={three_loop} lang="rs"></CodeBlock>
 		<br />
 		&emsp; I was curious if the best algorithm that Leet provided (written by a user called Shivam Aggarwal)
 		was faster. I suspected that since the problem had a small n, and the fact that Shivam's algorithm
@@ -71,20 +70,19 @@
 		Doing some mental math I was indexing into a hashmap 5n times, along with more pointer derefences
 		to random memory locations in the map. An n of atleast 64 such that log n would be equal to my map
 		indexing would make a more equal field. So I converted both algorithms to rust and used i128 and
-		capped n at 126 (to avoid any integer issues). I made some tests, setup criterion for some finer
-		benchmarking, and ran the code. My algorithm was slower. So first thing first, the easier pickings.
-		Rust's hashmap implementation for getting the keys loops over ALL memory buckets allocated in the
-		hash, I stored unique keys into an array and used that to loop over the map instead. My next thought
-		was to minimize branches, but in my connect function they were used to prevent null pointer derefences,
-		so it felt hard to remove, so I thought to use a zeroed out struct, and in a parallel thought I considered
-		moving more of the accessess to an array, in an attempt to better cache results. This also had the
-		benefit of removing the need for UnsafeCell in my code. The result of this started to approach Shivam's
-		implementation being faster in certain situations and worse in others (varying chain length). At
-		this point I felt it hard to think of any more major improvements that could be made. Perhaps I could
-		reorder some math expressions and simplify some parts, but I had a gut feeling this would be a minimal
-		gain. Just to be sure I ran a flamegraph and most of the time was spent on hash calculations. As
-		Rust's default hash has some focus on having HashDoS attack resistance, slowing it down, so I swapped
-		it out. Finally I had a solution faster than Shivam's, with about twice the speed on a lot of my
-		measurements.
+		capped n at 126 (to avoid any integer issues). Now time to compare and improve. I made some tests,
+		setup criterion for some finer benchmarking, and ran the code. My algorithm was significantly slower,
+		around half the speed. So first thing first, the easier pickings. Rust's hashmap implementation for
+		getting the keys loops over ALL memory buckets allocated in the hash, I stored unique keys into an
+		array and used that to loop over the map instead. My next thought was to minimize branches, but in
+		my connect function they were used to prevent null pointer derefences, so it felt hard to remove,
+		so I thought to use a zeroed out struct, and in a parallel thought I considered moving more of the
+		accessess to an array, in an attempt to better cache results. The result of this started to approach
+		Shivam's implementation being faster in certain situations and worse in others (varying chain length).
+		At this point I felt it hard to think of any more major improvements that could be made. Perhaps
+		I could reorder some math expressions and simplify some parts, but I had a gut feeling this would
+		be a minimal gain. Just to be sure I ran a flamegraph and most of the time was spent on hash calculations.
+		As Rust's default hash has some focus on HashDoS attack resistance, that slow it down, so swapping
+		it out brought the solution to twice the speed of Shivam's.
 	</p>
 </div>
