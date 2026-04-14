@@ -30,7 +30,7 @@
 
 <!-- For some reason using alias text-ctp-maroon-600 does not give the same result as in the home page, so a quick solution is just using the direct color-->
 <HomeButton color_for_button="text-[#dc414f]" transition_color="#dc414f"></HomeButton>
-<div class="h-content m-auto w-[1000px] max-w-full items-center justify-center pb-4">
+<div class="h-content m-auto w-[1000px] max-w-full items-center justify-center px-4 pb-4">
 	<div><h2 class="m-auto text-center text-4xl text-[#dc414f]">A Toy Car</h2></div>
 	<div>
 		<p class="z-10 text-xl text-pretty text-gray-950">
@@ -51,7 +51,7 @@
 	</div>
 </div>
 
-<div class="relative m-auto h-full w-[700px] max-w-full">
+<div class="relative m-auto h-full w-[700px] max-w-full px-4">
 	<svg class="relative w-full" viewBox="0 -8 24 18">
 		<title>Drawing of obstacle avoidation</title>
 		<g stroke="none" fill="none" fill-rule="evenodd">

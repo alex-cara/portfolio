@@ -5,7 +5,7 @@
 </script>
 
 <HomeButton color_for_button="text-gruv-purple-dim" transition_color="#b16286"></HomeButton>
-<div class="h-content relative m-auto w-[1000px] max-w-full items-center justify-center pb-4">
+<div class="h-content relative m-auto w-[1000px] max-w-full items-center justify-center px-4 pb-4">
 	<div><h2 class="text-gruv-purple-dim m-auto text-center text-4xl">About Me</h2></div>
 	<p class="z-10 text-xl text-pretty text-gray-950">
 		&emsp;My name is Alexandru Cara, and I am a software engineer who's passionate about writing

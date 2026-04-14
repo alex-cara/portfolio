@@ -6,7 +6,7 @@
 </script>
 
 <HomeButton color_for_button="text-gruv-yellow-dim" transition_color="#d79921"></HomeButton>
-<div class="h-content m-auto w-[1000px] max-w-full items-center justify-center pb-4">
+<div class="h-content m-auto w-[1000px] max-w-full items-center justify-center px-4 pb-4">
 	<h2 class="text-gruv-yellow-dim m-auto text-center text-4xl">Number of Beautiful Subsets</h2>
 
 	<p class="z-10 text-lg text-pretty">

@@ -6,7 +6,7 @@
 </script>
 
 <HomeButton color_for_button="text-gruv-aqua-dim" transition_color="#689d6a"></HomeButton>
-<div class="h-content m-auto w-[1000px] max-w-full items-center justify-center pb-4">
+<div class="h-content m-auto w-[1000px] max-w-full items-center justify-center px-4 pb-4">
 	<div><h2 class="text-gruv-aqua-dim m-auto text-center text-4xl">Rust AES</h2></div>
 	<div>
 		<p class="z-10 text-xl text-balance">
