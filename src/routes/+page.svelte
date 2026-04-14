@@ -8,8 +8,8 @@
 </script>
 
 <div class="relative z-90 flex h-screen items-center justify-center">
-	<div class="home-grid relative z-10 h-screen md:gap-2 md:p-8">
-		<div class="cell relative md:col-span-2 md:row-span-2">
+	<div class="home-grid relative z-10 h-screen gap-2 p-4 md:p-8">
+		<div class="cell relative col-span-2 row-span-2">
 			<CustomButton onclick={() => sphereColor.set('#b16286')} id="intro" href="/about">
 				<button class="latte bg-gruv-purple-dim interior-button">
 					<p class="font-ovo text-5xl font-semibold">alexandru cara</p>
@@ -28,13 +28,13 @@
 		<div class="cell relative">
 			<CustomButton id="exhibit2" href="/leet" onclick={() => setcolor('#d79921')}>
 				<button class="latte bg-gruv-yellow-dim interior-button">
-					<p class="font-ovo text-6xl">O(n&#8729lgn)</p>
+					<p class="font-ovo text-4xl font-extrabold">O(n&#8729lgn)</p>
 					<hr class="mx-auto my-4 h-1 w-12 rounded-sm border-0 bg-gray-100 dark:bg-black" />
-					<p class="font-ovo text-6xl">O(n)</p>
+					<p class="font-ovo text-4xl font-extrabold">O(n)</p>
 				</button>
 			</CustomButton>
 		</div>
-		<div class="cell relative md:col-span-2">
+		<div class="cell relative col-span-2">
 			<CustomButton id="exhibit3" href="/car" onclick={() => setcolor('#dc414f')}>
 				<button class="latte bg-ctp-maroon-600 interior-button">
 					<p class="font-ovo text-3xl font-extrabold">rc car</p>
@@ -54,46 +54,39 @@
 <style>
 	/* https://enjeck.com/btns/ */
 	/* That is a website with button hover effects */
+	.home-grid {
+		box-sizing: border-box;
+		margin: auto;
+		display: grid;
+		grid-template-columns: 33% 33% 34%;
+		grid-template-rows: 33% 33% 34%;
+		grid-template-areas:
+			'intro intro exhibit1'
+			'intro intro exhibit2'
+			'exhibit3 exhibit3 blog';
+	}
+
+	/* Medium+ screens: square grid */
 	@media only screen and (width >= 48rem) {
 		.home-grid {
-			box-sizing: border-box;
-			margin: auto;
-			display: grid;
 			height: 100vmin;
 			width: 100vmin;
-			grid-template-columns: 33% 33% 34%;
-			grid-template-rows: 33% 33% 34%;
-			grid-template-areas:
-				'intro intro exhibit1'
-				'intro intro exhibit2'
-				'exhibit3 exhibit3 blog';
-		}
-
-		.interior-button {
-			height: 100%;
-			width: 100%;
 		}
 	}
+
+	/* Small screens: rectangular grid with padding */
 	@media only screen and (width < 48rem) {
 		.home-grid {
-			margin: auto;
-			display: flex;
-			flex-direction: column;
-			justify-content: space-between;
-			width: 100%;
-			height: 100%;
+			width: calc(100% - 2rem);
+			height: calc(100vh - 2rem);
 		}
+	}
 
-		.cell {
-			min-height: 20vh;
-			overflow: scroll;
-			width: 100%;
-		}
-
-		.interior-button {
-			min-height: 100%;
-			min-width: 100%;
-			padding: 3px;
-		}
+	.interior-button {
+		height: 100%;
+		width: 100%;
+		overflow: hidden;
+		word-break: break-word;
+		padding: 0.5rem;
 	}
 </style>
